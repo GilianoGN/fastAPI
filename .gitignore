@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / Python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches de testes e cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Ambientes Virtuais
+.venv/
+venv/
+ENV/
+env/
+
+# Bancos de dados SQLite (locais e de testes)
+*.sqlite
+*.sqlite3
+*.db
+blog.sqlite
+tests.db
+
+# Configurações de IDE / Editor
+.vscode/
+.idea/
+
+# Variáveis de Ambiente e Segredos
+.env
+.env.*
+!.env.example
