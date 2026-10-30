@@ -1,8 +1,8 @@
-from pydantic import BaseModel, AwareDatatime
+from pydantic import BaseModel, AwareDatetime
 
 
 class PostOut(BaseModel):
     id: int
     title: str
     content: str
-    published_at: AwareDatatime | None
+    published_at: AwareDatetime | None
