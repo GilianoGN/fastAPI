@@ -1,21 +1,8 @@
-from src.exceptions import NotFoundPostError, NotFoundUserError
 from fastapi import FastAPI, status, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from contextlib import asynccontextmanager
-from src.database import database, engine, metadata
 from src.controllers import post, user, auth
-
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    from src.models.post import posts  # noqa
-    from src.models.user import users  # noqa
-
-    await database.connect()
-    metadata.create_all(engine)
-    yield
-    await database.disconnect()
+from src.exceptions import NotFoundPostError, NotFoundUserError
 
 
 tags_metadata = [
@@ -53,7 +40,6 @@ totalmente _documentado_.
 """,
     openapi_tags=tags_metadata,
     servers=servers,
-    lifespan=lifespan,
     )
 
 

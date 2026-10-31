@@ -12,7 +12,8 @@ dependencies = [
     "databases[aiosqlite,asyncpg]",
     "pyjwt",
     "psycopg2-binary",
-    "pydantic-settings"
+    "pydantic-settings",
+    "alembic"
 ]
 
 
