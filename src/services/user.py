@@ -1,6 +1,6 @@
 from databases.interfaces import Record
+from src.exceptions import NotFoundUserError
 from src.database import database
-from fastapi import HTTPException, status
 from src.models.user import users
 from src.schemas.user import UserIn, UserUpdateIn
 
@@ -24,8 +24,7 @@ class UserService:
     async def update(self, id: int, user: UserUpdateIn) -> Record:
         total = await self.count(id)
         if not total:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                                detail="User not found")
+            raise NotFoundUserError
         data = user.model_dump(exclude_unset=True)
         command = users.update().where(users.c.id == id).values(**data)
         await database.execute(command)
@@ -45,5 +44,5 @@ class UserService:
         query = users.select().where(users.c.id == id)
         user = await database.fetch_one(query)
         if not user:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                                detail="User not found")
+            raise NotFoundUserError
+        return user
