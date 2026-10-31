@@ -13,7 +13,8 @@ dependencies = [
     "pyjwt",
     "psycopg2-binary",
     "pydantic-settings",
-    "alembic"
+    "alembic",
+    "psycopg[binary]"
 ]
 
 
