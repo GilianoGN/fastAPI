@@ -3,6 +3,15 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from src.controllers import post, user, auth
 from src.exceptions import NotFoundPostError, NotFoundUserError
+from src.database import database
+from contextlib import asynccontextmanager
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await database.connect()
+    yield
+    await database.disconnect()
 
 
 tags_metadata = [
@@ -39,6 +48,7 @@ API para criação de blog __pessoal__ com criação de usuarios,
 totalmente _documentado_.
 """,
     openapi_tags=tags_metadata,
+    lifespan=lifespan,
     servers=servers,
     )
 
